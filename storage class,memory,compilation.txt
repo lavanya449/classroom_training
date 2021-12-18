@@ -1,0 +1,91 @@
+1.
+Memory Layout of C Program
+ 
+A typical memory representation of a C program consists of the following sections.
+1. Text segment  (i.e. instructions)
+2. Initialized data segment 
+3. Uninitialized data segment  (bss)
+4. Heap 
+5. Stack
+ 
+
+
+1. Text Segment: 
+A text segment, also known as a code segment or simply as text.As a memory region, a text segment may be placed below the heap or stack in order to prevent heaps and stack overflows from overwriting it. 
+ the text segment is often read-only, to prevent a program from accidentally modifying its instructions.
+
+
+2. Initialized Data Segment: 
+Initialized data segment, usually called simply the Data Segment. A data segment is a portion of the virtual address space of a program, which contains the global variables and static variables that are initialized by the programmer.ote that, the data segment is not read-only, since the values of the variables can be altered at run time.
+This segment can be further classified into the initialized read-only area and the initialized read-write area.
+
+
+3. Uninitialized Data Segment: 
+Uninitialized data segment often called the “bss” segment, named after an ancient assembler operator that stood for “block started bu symbol"
+uninitialized data starts at the end of the data segment and contains all global variables and static variables that are initialized to zero or do not have explicit initialization in source code.
+
+
+4. Stack: 
+The stack area traditionally adjoined the heap area and grew in the opposite direction; when the stack pointer met the heap pointer, free memory was exhausted. (With modern large address spaces and virtual memory techniques they may be placed almost anywhere, but they still typically grow in opposite directions.)
+
+
+
+5. Heap: 
+Heap is the segment where dynamic memory allocation usually takes place.
+The heap area begins at the end of the BSS segment and grows to larger addresses from there. The Heap area is managed by malloc, realloc, and free, which may use the brk and sbrk system calls to adjust its size 
+The Heap area is shared by all shared libraries and dynamically loaded modules in a process.
+
+
+2.
+Storage Classes in C
+Storage Classes are used to describe the features of a variable/function. These features basically include the scope, visibility and life-time which help us to trace the existence of a particular variable during the runtime of a program.
+
+Storage class	    Purpose
+auto	           It is a default storage class.
+extern	           It is a global variable.
+static	           It is a local variable which is capable of returning a value even when control is transferred to the function call.
+register	   It is a variable which is stored inside a register
+
+
+Auto Storage:
+The variables defined using auto storage class are called as local variables. Auto stands for automatic storage class. A variable is in auto storage class by default if it is not explicitly specified.
+The scope of an auto variable is limited with the particular block only. Once the control goes out of the block, the access is destroyed. This means only the block in which the auto variable is declared can access it.
+A keyword auto is used to define an auto storage class. By default, an auto variable contains a garbage value.
+
+
+Extern Storage:
+Extern stands for external storage class. Extern storage class is used when we have global functions or variables which are shared between two or more files.
+Keyword extern is used to declaring a global variable or function in another file to provide the reference of variable or function which have been already defined in the original file.
+The variables defined using an extern keyword are called as global variables. These variables are accessible throughout the program. Notice that the extern variable cannot be initialized it has already been defined in the original file.
+
+
+Static Storage:
+The static variables are used within function/ file as local static variables. They can also be used as a global variable
+Static local variable is a local variable that retains and stores its value between function calls or block and remains visible only to the function or block in which it is defined.
+Static global variables are global variables visible only to the file in which it is declared.
+Global variables are accessible throughout the file whereas static variables are accessible only to the particular part of a code.
+The lifespan of a static variable is in the entire program code. A variable which is declared or initialized using static keyword always contains zero as a default value.
+
+
+Register Storage:
+You can use the register storage class when you want to store local variables within functions or blocks in CPU registers instead of RAM to have quick access to these variables.
+The keyword register is used to declare a register storage class. The variables declared using register storage class has lifespan throughout the program.
+It is similar to the auto storage class. The variable is limited to the particular block. The only difference is that the variables declared using register storage class are stored inside CPU registers instead of a memory. Register has faster access than that of the main memory.
+
+
+3.
+Compilation 
+The compilation is a process of converting the source code into object code. It is done with the help of the compiler.
+The c compilation process converts the source code taken as input into the object code or machine code. The compilation process can be divided into four steps, i.e., Pre-processing, Compiling, Assembling, and Linking.
+
+Preprocessor:
+This source code is first passed to the preprocessor, and then the preprocessor expands this code. After expanding the code, the expanded code is passed to the compiler.
+
+Compiler:
+The code which is expanded by the preprocessor is passed to the compiler. The compiler converts this code into assembly code. Or we can say that the C compiler converts the pre-processed code into assembly code.
+
+Assembler:
+The assembly code is converted into object code by using an assembler. The name of the object file generated by the assembler is the same as the source file
+
+Linker:
+Mainly, all the programs written in C use library functions. These library functions are pre-compiled, and the object code of these library files is stored with '.lib' (or '.a') extension. The main working of the linker is to combine the object code of library files with the object code of our program. Sometimes the situation arises when our program refers to the functions defined in other files; then linker plays a very important role in this.
